@@ -49,7 +49,7 @@ libgphoto2-dev                  libcapi20-dev \
 libcups2-dev                    libgsm1-dev \
 ocl-icd-opencl-dev              libfreetype6-dev \
 libfontconfig1-dev              libxcomposite-dev \
-libgettextpo-dev;
+libgettextpo-dev 		libxml2-dev;
 
 
 RUN mkdir /wine && git clone git://source.winehq.org/git/wine.git /wine
