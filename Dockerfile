@@ -55,7 +55,7 @@ libgettextpo-dev;
 RUN mkdir /wine && git clone git://source.winehq.org/git/wine.git /wine
 
 ENV MAKEFLAGS=-j8
-ENV LDFLAGS=-fstack-protector-strong -Wl,-O2,--sort-common,--as-needed,-z,relro,-z,now
+ENV LDFLAGS=-fstack-protector-strong -Wl -O2 --sort-common --as-needed -z relro -z now
 ENV CXXFLAGS=-O2 -pipe -fstack-protector-strong -fno-plt -mmmx -msse -msse2 -mssse3 -msse3 -msse4.1 -msse4.2 -mfpmath=sse -mfma -mf16c -mpclmul -mpopcnt -mlzcnt -mavx -maes -mbmi -mbmi2 -mxsave -mxsaveopt -frecord-gcc-switches -D_FORTIFY_SOURCE=1
 ENV CPPFLAGS=-O2 -pipe -fstack-protector-strong -fno-plt -mmmx -msse -msse2 -mssse3 -msse3 -msse4.1 -msse4.2 -mfpmath=sse -mfma -mf16c -mpclmul -mpopcnt -mlzcnt -mavx -maes -mbmi -mbmi2 -mxsave -mxsaveopt -frecord-gcc-switches -D_FORTIFY_SOURCE=1
 ENV CFLAGS=-O2 -pipe -fstack-protector-strong -fno-plt -mmmx -msse -msse2 -mssse3 -msse3 -msse4.1 -msse4.2 -mfpmath=sse -mfma -mf16c -mpclmul -mpopcnt -mlzcnt -mavx -maes -mbmi -mbmi2 -mxsave -mxsaveopt -frecord-gcc-switches -D_FORTIFY_SOURCE=1
