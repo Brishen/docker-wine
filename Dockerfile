@@ -53,7 +53,7 @@ RUN     apt-get install -y --no-install-recommends \
 RUN ln -s /usr/bin/widl-stable /usr/bin/widl
 
 RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d && cd /vkd3d && ./autogen.sh && ./configure && make -j4 && make install
-RUN wget -O faudio.tar.gz https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf faudio.tar.gz && mv faudio /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
+RUN wget -O faudio.tar.gz https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf faudio.tar.gz && mv FAudio-21.01 /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine
 WORKDIR /wine
 RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader /usr/bin/autoheader-2.69
