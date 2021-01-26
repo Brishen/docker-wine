@@ -3,8 +3,9 @@ from ubuntu:20.10
 # https://github.com/AndreRH/hangover/blob/master/Dockerfile
 
 ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install software-properties-common
 RUN add-apt-repository ppa:cybermax-dexter/sdl2-backport
-RUN     apt-get update && apt-get install -y --no-install-recommends \
+RUN     apt-get install -y --no-install-recommends \
         unzip \
         wget \
         python \
