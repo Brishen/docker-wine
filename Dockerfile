@@ -27,6 +27,7 @@ RUN     apt-get install -y --no-install-recommends \
         wine64-tools \
         wine64-development-tools \
         gettext \
+        cmake \
         g++ \
         make \
         gcc \
