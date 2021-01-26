@@ -67,33 +67,7 @@ RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader 
 
 ENV NOTESTS 1
 
-RUN ./configure                --with-alsa \
---with-capi                     --with-cms \
---without-coreaudio             --with-cups --with-dbus \
---with-fontconfig               --with-freetype \
---with-gettext                  --without-gettextpo \
---with-gphoto                  \
---with-gnutls                   --with-gsm \
---with-gssapi                   --with-gstreamer \
---without-hal                   --with-jpeg \
---with-krb5                     --with-ldap \
---with-mpg123                   --with-netapi \
---with-openal                   --with-opencl \
---with-opengl                   --with-osmesa \
---with-oss                      --with-pcap \
---with-png                      --with-pthread \
---with-pulse                    --with-sane \
---with-sdl                      --with-tiff \
---with-udev \
---with-vkd3d                    --with-vulkan \
---with-xcomposite               --with-xcursor \
---with-xfixes                   --with-xinerama \
---without-xinput                --with-xinput2 \
---with-xml                      --with-xrandr \
---with-xrender                  --with-xshape \
---with-xshm                     --with-xslt \
---with-xxf86vm                 \
---with-x                        --enable-win64;
+RUN ./configure --options
 RUN make
 
 
