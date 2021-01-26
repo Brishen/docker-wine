@@ -48,7 +48,7 @@ RUN     apt-get install -y --no-install-recommends \
         libfontconfig1-dev              libxcomposite-dev \
         libgettextpo-dev                spirv-headers;
         
-# RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt clean && apt update
 RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d && cd /vkd3d && ./autogen.sh && ./configure && make -j4 && make install
 RUN wget https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf 21.01.tar.gz && mkdir /faudio && mv 21.01 /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine
