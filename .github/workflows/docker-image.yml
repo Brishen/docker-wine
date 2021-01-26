@@ -16,11 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag wine64:$(date +%s) -o build64
+        run: docker build --output type=tar,dest=build64/build64.tar . --file Dockerfile --tag wine64:$(date +%s)
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: binaries
           path: |
-            build64
+            build64/build64.tar
   
