@@ -63,7 +63,8 @@ RUN git clone git://source.winehq.org/git/wine.git /wine
 #ENV CFLAGS=$FLAGS
 # RUN chmod -R 777 /wine
 WORKDIR /wine
-RUN ls
+RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader /usr/bin/autoheader-2.69
+
 RUN /wine/configure                --with-alsa \
 --with-capi                     --with-cms \
 --without-coreaudio             --with-cups --with-dbus \
@@ -92,5 +93,6 @@ RUN /wine/configure                --with-alsa \
 --with-xxf86vm                 \
 --with-x                        --enable-win64;
 RUN make
+
 
 RUN cat config.log
