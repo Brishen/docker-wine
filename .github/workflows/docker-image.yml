@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wine64:$(date +%s)
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag wine64:$(date +%s) -v "build64":/wine
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries
+          path: |
+            build64
+  
