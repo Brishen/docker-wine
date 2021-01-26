@@ -67,7 +67,7 @@ RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader 
 
 ENV NOTESTS 1
 
-RUN ./configure
+RUN ./configure --enable-win64
 RUN make
 
 
