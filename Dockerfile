@@ -22,6 +22,8 @@ RUN     apt-get install -y --no-install-recommends \
         automake autoconf pkg-config libtool \
         automake1.11 autoconf2.13 autoconf2.64 \
         gtk-doc-tools git gperf groff p7zip-full \
+        build-essential \
+        wine64-tools \
         gettext \
         g++ \
         make \
@@ -44,30 +46,13 @@ RUN     apt-get install -y --no-install-recommends \
         libcups2-dev                    libgsm1-dev \
         ocl-icd-opencl-dev              libfreetype6-dev \
         libfontconfig1-dev              libxcomposite-dev \
-        libgettextpo-dev                spirv-headers \
-        faudio ;
-
-RUN apt-get install -y build-essential
-
-RUN apt clean && rm -rf /var/lib/apt/lists/*
-RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d
-WORKDIR /vkd3d
-RUN apt update && apt install -y wine64-tools
-RUN ./autogen.sh && ./configure && make -j4 && make install
-
+        libgettextpo-dev                spirv-headers;
+        
+# RUN apt clean && rm -rf /var/lib/apt/lists/*
+RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d && cd /vkd3d && ./autogen.sh && ./configure && make -j4 && make install
 RUN wget https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf 21.01.tar.gz && mkdir /faudio && mv 21.01 /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
-#RUN mkdir /wine && chmod -R 777 /wine
-#RUN git clone git://source.winehq.org/git/wine.git /wine
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine
 WORKDIR /wine
-#ENV MAKEFLAGS="-j8"
-#ENV LDFLAGS="-fstack-protector-strong -Wl -O2 --sort-common --as-needed -z relro -z now"
-#ENV FLAGS="-O2 -pipe -fstack-protector-strong -fno-plt -mmmx -msse -msse2 -mssse3 -msse3 -msse4.1 -msse4.2 -mfpmath=sse -mfma -mf16c -mpclmul -mpopcnt -mlzcnt -mavx -maes -mbmi -mbmi2 -mxsave -mxsaveopt -frecord-gcc-switches -D_FORTIFY_SOURCE=1"
-#ENV CXXFLAGS=$FLAGS
-#ENV CPPFLAGS=$FLAGS
-#ENV CFLAGS=$FLAGS
-# RUN chmod -R 777 /wine
-
 RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader /usr/bin/autoheader-2.69
 
 ENV NOTESTS 1
