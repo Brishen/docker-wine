@@ -54,7 +54,7 @@ RUN apt update && apt install -y wine64-tools
 RUN ./autogen.sh && ./configure && make && make install
 #RUN mkdir /wine && chmod -R 777 /wine
 #RUN git clone git://source.winehq.org/git/wine.git /wine
-RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && cd wine-6.0
+RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine && cd /wine
 #ENV MAKEFLAGS="-j8"
 #ENV LDFLAGS="-fstack-protector-strong -Wl -O2 --sort-common --as-needed -z relro -z now"
 #ENV FLAGS="-O2 -pipe -fstack-protector-strong -fno-plt -mmmx -msse -msse2 -mssse3 -msse3 -msse4.1 -msse4.2 -mfpmath=sse -mfma -mf16c -mpclmul -mpopcnt -mlzcnt -mavx -maes -mbmi -mbmi2 -mxsave -mxsaveopt -frecord-gcc-switches -D_FORTIFY_SOURCE=1"
@@ -67,7 +67,7 @@ RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader 
 
 ENV NOTESTS 1
 
-RUN configure                --with-alsa \
+RUN ./configure                --with-alsa \
 --with-capi                     --with-cms \
 --without-coreaudio             --with-cups --with-dbus \
 --with-fontconfig               --with-freetype \
