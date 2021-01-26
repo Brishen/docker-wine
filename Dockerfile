@@ -4,6 +4,7 @@ from ubuntu:20.10
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y software-properties-common
+RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && apt-key add winehq.key && add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ groovy main'
 RUN add-apt-repository ppa:cybermax-dexter/sdl2-backport
 RUN     apt-get install -y --no-install-recommends \
         unzip \
@@ -24,6 +25,8 @@ RUN     apt-get install -y --no-install-recommends \
         gtk-doc-tools git gperf groff p7zip-full \
         build-essential \
         wine64-tools \
+        wine64-development-tools \
+        winehq-stable \
         gettext \
         g++ \
         make \
@@ -48,9 +51,10 @@ RUN     apt-get install -y --no-install-recommends \
         libfontconfig1-dev              libxcomposite-dev \
         libgettextpo-dev                spirv-headers;
         
-RUN ln -s /usr/bin/widl-stable /usr/bin/widl
+RUN ln -s /usr/bin/widl-development /usr/bin/widl
+
 RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d && cd /vkd3d && ./autogen.sh && ./configure && make -j4 && make install
-RUN wget https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf 21.01.tar.gz && mkdir /faudio && mv 21.01 /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
+RUN wget -O faudio.tar.gz https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf faudio.tar.gz && mv faudio /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine
 WORKDIR /wine
 RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader /usr/bin/autoheader-2.69
