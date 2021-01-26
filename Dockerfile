@@ -3,11 +3,11 @@ from ubuntu:20.10
 # https://github.com/AndreRH/hangover/blob/master/Dockerfile
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        unzip wget python
-
-RUN     apt-get install -y --no-install-recommends \
+RUN sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport
+RUN     apt-get update && apt-get install -y --no-install-recommends \
+        unzip \
+        wget \
+        python \
         ca-certificates \
         python \
         flex bison \
@@ -43,7 +43,8 @@ RUN     apt-get install -y --no-install-recommends \
         libcups2-dev                    libgsm1-dev \
         ocl-icd-opencl-dev              libfreetype6-dev \
         libfontconfig1-dev              libxcomposite-dev \
-        libgettextpo-dev                spirv-headers;
+        libgettextpo-dev                spirv-headers \
+        faudio ;
 
 RUN apt-get install -y build-essential
 
@@ -52,6 +53,8 @@ RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d
 WORKDIR /vkd3d
 RUN apt update && apt install -y wine64-tools
 RUN ./autogen.sh && ./configure && make -j4 && make install
+
+RUN wget https://github.com/FNA-XNA/FAudio/archive/21.01.tar.gz && tar -xf 21.01.tar.gz && mkdir /faudio && mv 21.01 /faudio && mkdir /faudio/build && cd /faudio/build && cmake ../ && make && make install
 #RUN mkdir /wine && chmod -R 777 /wine
 #RUN git clone git://source.winehq.org/git/wine.git /wine
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine
