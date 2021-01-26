@@ -65,6 +65,8 @@ RUN git clone git://source.winehq.org/git/wine.git /wine
 WORKDIR /wine
 RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader /usr/bin/autoheader-2.69
 
+ENV NOTESTS 1
+
 RUN /wine/configure                --with-alsa \
 --with-capi                     --with-cms \
 --without-coreaudio             --with-cups --with-dbus \
