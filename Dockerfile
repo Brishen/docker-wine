@@ -3,7 +3,7 @@ from ubuntu:20.10
 # https://github.com/AndreRH/hangover/blob/master/Dockerfile
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y software-properties-common
+RUN apt-get update && apt-get install -y software-properties-common wget
 RUN wget -nc https://dl.winehq.org/wine-builds/winehq.key && apt-key add winehq.key && add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ groovy main'
 RUN add-apt-repository ppa:cybermax-dexter/sdl2-backport
 RUN     apt-get install -y --no-install-recommends \
