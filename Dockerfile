@@ -51,7 +51,7 @@ RUN apt clean && rm -rf /var/lib/apt/lists/*
 RUN mkdir /vkd3d && git clone git://source.winehq.org/git/vkd3d.git/ /vkd3d
 WORKDIR /vkd3d
 RUN apt update && apt install -y wine64-tools
-RUN ./autogen.sh && ./configure && make && make install
+RUN ./autogen.sh && ./configure && make -j4 && make install
 #RUN mkdir /wine && chmod -R 777 /wine
 #RUN git clone git://source.winehq.org/git/wine.git /wine
 RUN wget https://dl.winehq.org/wine/source/6.0/wine-6.0.tar.xz && tar -xf wine-6.0.tar.xz && mv wine-6.0 /wine && cd /wine
@@ -68,7 +68,7 @@ RUN ln -s /usr/bin/autoconf /usr/bin/autoconf-2.69 && ln -s /usr/bin/autoheader 
 ENV NOTESTS 1
 
 RUN ./configure --enable-win64
-RUN make
+RUN make -j4
 
 
 RUN cat config.log
