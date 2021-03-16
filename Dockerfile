@@ -100,7 +100,7 @@ RUN ./configure --enable-win64              --without-alsa \
              --without-xshm \
              --without-xslt \
              --without-xxf86vm \
-             --without-zlib  \
+             --without-zlib 
 RUN make -j4
 
 
